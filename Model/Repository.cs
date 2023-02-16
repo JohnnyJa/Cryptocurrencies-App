@@ -21,15 +21,25 @@ public class Repository
     
     public async Task<Assets> GetTopAssetsAsync()
     {
-        Uri url = new Uri(_client.BaseAddress!,"assets/" + "?limit=10");
-        Assets? asset = await _client.GetFromJsonAsync<Assets>(url);
-        return asset;
+        string relativeUrl = "assets/?limit=10";
+        Uri url = new Uri(_client.BaseAddress!, relativeUrl);
+        Assets? assets = await _client.GetFromJsonAsync<Assets>(url);
+        return assets;
     }
     
     public async Task<Asset> GetAssetByIdAsync(string id)
     {
-        Uri url = new Uri(_client.BaseAddress!,"assets/" + id);
+        string relativeUrl = "assets/" + id;
+        Uri url = new Uri(_client.BaseAddress!, relativeUrl);
         Asset? asset = await _client.GetFromJsonAsync<Asset>(url);
         return asset;
+    }
+
+    public async Task<Assets> GetSearchedAssetsAsync(string keyword)
+    {
+        string relativeUrl = "assets?search=" + keyword;
+        Uri url = new Uri(_client.BaseAddress!, relativeUrl);
+        Assets? assets = await _client.GetFromJsonAsync<Assets>(url);
+        return assets;
     }
 }

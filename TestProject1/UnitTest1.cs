@@ -30,4 +30,14 @@ public class Tests
             Assert.Pass();
         }
     }
+    
+    [Test]
+    public async Task Test3()
+    {
+        Assets asset = await repository.GetSearchedAssetsAsync("BTC");
+        if (asset.data.First().Id == "bitcoin")
+        {
+            Assert.Pass();
+        }
+    }
 }
