@@ -14,8 +14,8 @@ public class Tests
     public async Task Test1()
     {
         
-        Asset asset = await repository.GetAssetByIdAsync("bitcoin");
-        if (asset.data.Id == "bitcoin")
+        GotAsset gotAsset = await repository.GetAssetByIdAsync("bitcoin");
+        if (gotAsset.Data.Id == "bitcoin")
         {
             Assert.Pass();
         }
@@ -24,8 +24,8 @@ public class Tests
     [Test]
     public async Task Test2()
     {
-        Assets asset = await repository.GetTopAssetsAsync();
-        if (asset.data.First().Id == "bitcoin")
+        GotAssets gotAsset = await repository.GetTopAssetsAsync();
+        if (gotAsset.Data.First().Id == "bitcoin")
         {
             Assert.Pass();
         }
@@ -34,8 +34,8 @@ public class Tests
     [Test]
     public async Task Test3()
     {
-        Assets asset = await repository.GetSearchedAssetsAsync("BTC");
-        if (asset.data.First().Id == "bitcoin")
+        GotAssets gotAsset = await repository.GetSearchedAssetsAsync("BTC");
+        if (gotAsset.Data.First().Id == "bitcoin")
         {
             Assert.Pass();
         }

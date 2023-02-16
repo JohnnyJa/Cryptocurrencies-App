@@ -2,21 +2,21 @@
 
 namespace Model;
 
+public class GotAsset
+{
+    public Asset Data { get; set; }
+    public long timestamp;
+}
+
+public class GotAssets
+{
+    public List<Asset> Data { get; set; }
+    public long timestamp;
+}
+
 public class Asset
 {
-    public Data data { get; set; }
-    public long timestamp;
-}
-
-public class Assets
-{
-    public List<Data> data { get; set; }
-    public long timestamp;
-}
-
-public class Data
-{
-    public string Id { get; set; }
+    public string Id { get; set; } 
     public string Rank { get; set; }
     public string Symbol { get; set; }
     public string name { get; set; }
