@@ -36,5 +36,12 @@ namespace Test
                 detailedWindow.Show();
             }
         }
+
+        private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+            var viewModel = (MainViewModel)DataContext;
+            viewModel.GetSearchedData(textBox.Text);
+        }
     }
 }

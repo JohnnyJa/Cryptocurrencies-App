@@ -5,12 +5,12 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Model;
 
-
 public class Repository
 {
     static HttpClient _client = new HttpClient();
 
     private static Repository uniqueRepository;
+
     public static Repository GetInstance()
     {
         if (uniqueRepository == null)
@@ -20,16 +20,15 @@ public class Repository
 
         return uniqueRepository;
     }
-    
+
     private Repository()
     {
-        
         _client.BaseAddress = new Uri("https://api.coincap.io/v2/");
         _client.DefaultRequestHeaders.Accept.Clear();
         _client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
     }
-    
+
     public async Task<List<Asset>> GetTopAssetsAsync(int num)
     {
         string relativeUrl = "assets/?limit=" + num;
@@ -37,7 +36,7 @@ public class Repository
         AssetsData? assets = await _client.GetFromJsonAsync<AssetsData>(url);
         return assets.Data;
     }
-    
+
     public async Task<Asset> GetAssetByIdAsync(string id)
     {
         string relativeUrl = "assets/" + id;
@@ -46,14 +45,14 @@ public class Repository
         return asset.Data;
     }
 
-    public async Task<List<Asset>> GetSearchedAssetsAsync(string keyword)
+    public async Task<List<Asset>> GetSearchedAssetsAsync(string keyword, int? num = 10)
     {
-        string relativeUrl = "assets?search=" + keyword;
+        string relativeUrl = "assets?search=" + keyword + "&limit=" + num;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
         AssetsData? assets = await _client.GetFromJsonAsync<AssetsData>(url);
         return assets.Data;
     }
-    
+
     public async Task<List<Market>> GetMarketsByIdAsync(string id, int? num = 10)
     {
         string relativeUrl = "assets/" + id + "/markets?limit=" + num;

@@ -29,6 +29,12 @@ public class MainViewModel : ViewModel
         var assets = await RepositoryInstance.GetTopAssetsAsync(10);
         Assets = new ObservableCollection<Asset>(assets);
     }
+
+    public async void GetSearchedData(string keyword)
+    {
+        var assets = await RepositoryInstance.GetSearchedAssetsAsync(keyword);
+        Assets = new ObservableCollection<Asset>(assets);
+    }
     
     
 }
