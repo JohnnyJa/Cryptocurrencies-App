@@ -26,5 +26,15 @@ namespace Test
             InitializeComponent();
             DataContext = new AppViewModel();
         }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount >= 2)
+            {
+                DetailedWindow detailedWindow = new DetailedWindow(this);
+                detailedWindow.Owner = this;
+                detailedWindow.Show();
+            }
+        }
     }
 }

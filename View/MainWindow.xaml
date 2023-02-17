@@ -7,11 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 <Grid Background="Lavender">
-        <ListBox ItemsSource="{Binding Datas}" >
+        <ListBox ItemsSource="{Binding EntitiesToVisualize}" SelectedItem="{Binding SelectedAsset}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="5">
-                        <TextBlock FontSize="18" Text="{Binding Path=Id, UpdateSourceTrigger=PropertyChanged}" />
+                <DataTemplate >
+                    <StackPanel MouseDown="UIElement_OnMouseLeftButtonDown">
+                        <TextBlock Width="Auto" FontSize="18" Text="{Binding Path=Id, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
