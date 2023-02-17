@@ -10,7 +10,18 @@ public class Repository
 {
     static HttpClient _client = new HttpClient();
 
-    public Repository()
+    private static Repository uniqueRepository;
+    public static Repository GetInstance()
+    {
+        if (uniqueRepository == null)
+        {
+            uniqueRepository = new Repository();
+        }
+
+        return uniqueRepository;
+    }
+    
+    private Repository()
     {
         
         _client.BaseAddress = new Uri("https://api.coincap.io/v2/");
@@ -19,27 +30,27 @@ public class Repository
             new MediaTypeWithQualityHeaderValue("application/json"));
     }
     
-    public async Task<GotAssets> GetTopAssetsAsync()
+    public async Task<List<Asset>> GetTopAssetsAsync(int num)
     {
-        string relativeUrl = "assets/?limit=10";
+        string relativeUrl = "assets/?limit=" + num;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
         GotAssets? assets = await _client.GetFromJsonAsync<GotAssets>(url);
-        return assets;
+        return assets.Data;
     }
     
-    public async Task<GotAsset> GetAssetByIdAsync(string id)
+    public async Task<Asset> GetAssetByIdAsync(string id)
     {
         string relativeUrl = "assets/" + id;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
         GotAsset? asset = await _client.GetFromJsonAsync<GotAsset>(url);
-        return asset;
+        return asset.Data;
     }
 
-    public async Task<GotAssets> GetSearchedAssetsAsync(string keyword)
+    public async Task<List<Asset>> GetSearchedAssetsAsync(string keyword)
     {
         string relativeUrl = "assets?search=" + keyword;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
         GotAssets? assets = await _client.GetFromJsonAsync<GotAssets>(url);
-        return assets;
+        return assets.Data;
     }
 }

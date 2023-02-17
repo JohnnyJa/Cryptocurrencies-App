@@ -1,40 +1,44 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using Model;
 
 namespace ViewModel;
 
 public class AppViewModel : INotifyPropertyChanged
 {
-    private Repository _repository = new Repository();
-    private ObservableCollection<Asset> datas;
-    public ObservableCollection<Asset> Datas
+    private readonly Repository _repository;
+
+    
+    private ObservableCollection<object> _entitiesToVisualize;
+
+    public ObservableCollection<object> EntitiesToVisualize
     {
-        get { return datas; }
+        get => _entitiesToVisualize;
         set
         {
-            datas = value;
-            OnPropertyChanged("Datas");
-        } }
+            _entitiesToVisualize = value;
+            OnPropertyChanged();
+        } 
+    }
     
 
     public AppViewModel()
     {
+        _repository = Repository.GetInstance();
         GetData();
     }
 
-    public async void GetData()
+    private async void GetData()
     {
-        var assets = await _repository.GetTopAssetsAsync();
-        Datas = new ObservableCollection<Asset>(assets.Data);
+        var assets = await _repository.GetTopAssetsAsync(10);
+        EntitiesToVisualize = new ObservableCollection<object>(assets);
     }
     
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
     public void OnPropertyChanged([CallerMemberName]string prop = "")
     {
-        if (PropertyChanged != null)
+        if (PropertyChanged != null) 
             PropertyChanged(this, new PropertyChangedEventArgs(prop));
     }
 }
