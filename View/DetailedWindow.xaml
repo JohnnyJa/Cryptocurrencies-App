@@ -7,8 +7,26 @@
         mc:Ignorable="d"
         Title="DetailedWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel >
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel>
             <TextBlock Width="Auto" FontSize="18" Text="{Binding Path=SelectedAsset.Id, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Markets}" SelectedItem="{Binding SelectedAsset}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate >
+                    <StackPanel >
+                        <TextBlock Width="Auto" FontSize="18" Text="{Binding Path=ExchangeId, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
