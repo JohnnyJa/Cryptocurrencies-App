@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="DetailedWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel DataContext="">
-            <TextBlock Width="Auto" FontSize="18" Text="{Binding Path=Id, UpdateSourceTrigger=PropertyChanged}" />
+        <StackPanel >
+            <TextBlock Width="Auto" FontSize="18" Text="{Binding Path=SelectedAsset.Id, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
     </Grid>
 </Window>

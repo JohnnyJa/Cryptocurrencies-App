@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 <Grid Background="Lavender">
-        <ListBox ItemsSource="{Binding EntitiesToVisualize}" SelectedItem="{Binding SelectedAsset}">
+        <ListBox ItemsSource="{Binding Assets}" SelectedItem="{Binding SelectedAsset}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

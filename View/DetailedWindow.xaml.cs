@@ -1,12 +1,16 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using Model;
+using ViewModel;
 
 namespace Test;
 
 public partial class DetailedWindow : Window
 {
-    public DetailedWindow(Window owner)
+    public DetailedWindow(Asset selectedAsset)
     {
-        Owner = owner;
         InitializeComponent();
+        DataContext = new DetailedViewModel(selectedAsset);
+        Console.WriteLine("12");
     }
 }

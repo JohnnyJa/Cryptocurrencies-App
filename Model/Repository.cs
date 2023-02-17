@@ -34,7 +34,7 @@ public class Repository
     {
         string relativeUrl = "assets/?limit=" + num;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
-        GotAssets? assets = await _client.GetFromJsonAsync<GotAssets>(url);
+        AssetsData? assets = await _client.GetFromJsonAsync<AssetsData>(url);
         return assets.Data;
     }
     
@@ -42,7 +42,7 @@ public class Repository
     {
         string relativeUrl = "assets/" + id;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
-        GotAsset? asset = await _client.GetFromJsonAsync<GotAsset>(url);
+        AssetData? asset = await _client.GetFromJsonAsync<AssetData>(url);
         return asset.Data;
     }
 
@@ -50,7 +50,7 @@ public class Repository
     {
         string relativeUrl = "assets?search=" + keyword;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
-        GotAssets? assets = await _client.GetFromJsonAsync<GotAssets>(url);
+        AssetsData? assets = await _client.GetFromJsonAsync<AssetsData>(url);
         return assets.Data;
     }
 }
