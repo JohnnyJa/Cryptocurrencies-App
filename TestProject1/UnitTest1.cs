@@ -41,4 +41,14 @@ public class Tests
             Assert.Pass();
         }
     }
+    
+    [Test]
+    public async Task Test4()
+    {
+        var gotAsset = await repository.GetMarketsByIdAsync("bitcoin");
+        if (gotAsset.First().ExchangeId == "Binance")
+        {
+            Assert.Pass();
+        }
+    }
 }

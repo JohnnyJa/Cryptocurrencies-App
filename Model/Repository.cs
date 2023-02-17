@@ -53,4 +53,12 @@ public class Repository
         AssetsData? assets = await _client.GetFromJsonAsync<AssetsData>(url);
         return assets.Data;
     }
+    
+    public async Task<List<Market>> GetMarketsByIdAsync(string id, int? num = 10)
+    {
+        string relativeUrl = "assets/" + id + "/markets?limit=" + num;
+        Uri url = new Uri(_client.BaseAddress!, relativeUrl);
+        MarketsData? markets = await _client.GetFromJsonAsync<MarketsData>(url);
+        return markets.Data;
+    }
 }
