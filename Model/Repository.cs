@@ -10,7 +10,6 @@ public class Repository
     static HttpClient _client = new HttpClient();
 
     private static Repository uniqueRepository;
-
     public static Repository GetInstance()
     {
         if (uniqueRepository == null)
@@ -23,6 +22,7 @@ public class Repository
 
     private Repository()
     {
+        
         _client.BaseAddress = new Uri("https://api.coincap.io/v2/");
         _client.DefaultRequestHeaders.Accept.Clear();
         _client.DefaultRequestHeaders.Accept.Add(

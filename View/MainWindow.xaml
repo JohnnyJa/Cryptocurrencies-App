@@ -6,27 +6,20 @@
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-<Grid Background="Lavender">
-    <Grid.RowDefinitions>
-        <RowDefinition></RowDefinition>
-        <RowDefinition></RowDefinition>
-    </Grid.RowDefinitions>
-    <StackPanel>
-        <TextBox MaxLength="250" TextChanged="TextBoxBase_OnTextChanged"></TextBox>
-    </StackPanel>
-    <ListBox Grid.Row="1" ItemsSource="{Binding Assets}" SelectedItem="{Binding SelectedAsset}">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
-                <DataTemplate >
-                    <StackPanel MouseDown="UIElement_OnMouseLeftButtonDown">
-                        <TextBlock Width="Auto" FontSize="18" Text="{Binding Path=Id, UpdateSourceTrigger=PropertyChanged}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+    <Grid Background="Lavender">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.35*"></RowDefinition>
+            <RowDefinition Height="0.95*"></RowDefinition>
+            <RowDefinition Height="0.35*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBox MaxLength="250" Width="200" VerticalAlignment="Center" HorizontalAlignment="Right" TextChanged="TextBoxBase_OnTextChanged"></TextBox>
+            <ListView Grid.Row="1" ItemsSource="{Binding Assets}" SelectedItem="{Binding SelectedAsset}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Rank}">Rank</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"> Name</GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

@@ -14,19 +14,20 @@
         <StackPanel>
             <TextBlock Width="Auto" FontSize="18" Text="{Binding Path=SelectedAsset.Id, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
-        <ListBox Grid.Row="1" ItemsSource="{Binding Markets}" SelectedItem="{Binding SelectedAsset}">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
+        <ListView Grid.Row="1" ItemsSource="{Binding Markets}" SelectedItem="{Binding SelectedAsset}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
                 </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
+            </ListView.ItemContainerStyle>
+            
+            <ListView.ItemTemplate>
                 <DataTemplate >
                     <StackPanel >
                         <TextBlock Width="Auto" FontSize="18" Text="{Binding Path=ExchangeId, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

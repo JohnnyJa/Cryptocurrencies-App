@@ -17,8 +17,8 @@ public class Asset
     public string Id { get; set; } 
     public string Rank { get; set; }
     public string Symbol { get; set; }
-    public string name { get; set; }
-    public string supply { get; set; }
+    public string Name { get; set; }
+    public string Supply { get; set; }
     public string maxSupply { get; set; }
     public string marketCapUsd { get; set; }
     public string volumeUsd24Hr { get; set; }
