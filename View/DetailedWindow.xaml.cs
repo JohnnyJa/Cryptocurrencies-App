@@ -7,10 +7,9 @@ namespace Test;
 
 public partial class DetailedWindow : Window
 {
-    public DetailedWindow(Asset selectedAsset)
+    public DetailedWindow()
     {
         InitializeComponent();
-        DataContext = new DetailedViewModel(selectedAsset);
-        Console.WriteLine("12");
+
     }
 }

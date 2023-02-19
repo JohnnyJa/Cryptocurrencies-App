@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Collections.ObjectModel;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
@@ -29,7 +30,7 @@ public class Repository
             new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
-    public async Task<List<Asset>> GetTopAssetsAsync(int num)
+    public async Task<ObservableCollection<Asset>> GetTopAssetsAsync(int num)
     {
         string relativeUrl = "assets/?limit=" + num;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
@@ -45,7 +46,7 @@ public class Repository
         return asset.Data;
     }
 
-    public async Task<List<Asset>> GetSearchedAssetsAsync(string keyword, int? num = 10)
+    public async Task<ObservableCollection<Asset>> GetSearchedAssetsAsync(string keyword, int? num = 10)
     {
         string relativeUrl = "assets?search=" + keyword + "&limit=" + num;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
@@ -53,7 +54,7 @@ public class Repository
         return assets.Data;
     }
 
-    public async Task<List<Market>> GetMarketsByIdAsync(string id, int? num = 10)
+    public async Task<ObservableCollection<Market>> GetMarketsByIdAsync(string id, int? num = 10)
     {
         string relativeUrl = "assets/" + id + "/markets?limit=" + num;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);

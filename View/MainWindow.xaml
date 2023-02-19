@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -12,14 +13,21 @@
             <RowDefinition Height="0.95*"></RowDefinition>
             <RowDefinition Height="0.35*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox MaxLength="250" Width="200" VerticalAlignment="Center" HorizontalAlignment="Right" TextChanged="TextBoxBase_OnTextChanged"></TextBox>
-            <ListView Grid.Row="1" ItemsSource="{Binding Assets}" SelectedItem="{Binding SelectedAsset}">
+        <TextBox Style="{StaticResource placeHolder}" Tag="Search..." MaxLength="250" Width="200" VerticalAlignment="Center" HorizontalAlignment="Right"
+                 Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}">
+            
+        </TextBox>
+        <ListView Grid.Row="1" ItemsSource="{Binding Assets.Result}" SelectedItem="{Binding SelectedAsset}" MouseDoubleClick="Control_OnMouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Rank}">Rank</GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"> Name</GridViewColumn>
                 </GridView>
             </ListView.View>
+            <i:Interaction.Triggers>
+                
+            </i:Interaction.Triggers>
         </ListView>
+        
     </Grid>
 </Window>

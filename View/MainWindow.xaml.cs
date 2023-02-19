@@ -21,27 +21,18 @@ namespace Test
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel _mainViewModel = new MainViewModel();
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = _mainViewModel;
         }
 
-        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (e.ClickCount >= 2)
-            {
-                var viewModel = (MainViewModel)DataContext;
-                DetailedWindow detailedWindow = new DetailedWindow(viewModel.SelectedAsset);
-                detailedWindow.Show();
-            }
-        }
-
-        private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            var viewModel = (MainViewModel)DataContext;
-            viewModel.GetSearchedData(textBox.Text);
+            DetailedWindow detailedWindow = new DetailedWindow();
+            detailedWindow.DataContext = _mainViewModel.GetDetailedWindowInfo();
+            detailedWindow.Show();
         }
     }
 }

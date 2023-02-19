@@ -8,8 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{5C7B4114-1200-4C39-9BE7-2BA45B575FB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{8DF09964-C461-4659-9E2C-00A425C99ED6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,9 +30,5 @@ Global
 		{5C7B4114-1200-4C39-9BE7-2BA45B575FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C7B4114-1200-4C39-9BE7-2BA45B575FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C7B4114-1200-4C39-9BE7-2BA45B575FB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8DF09964-C461-4659-9E2C-00A425C99ED6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8DF09964-C461-4659-9E2C-00A425C99ED6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8DF09964-C461-4659-9E2C-00A425C99ED6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8DF09964-C461-4659-9E2C-00A425C99ED6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

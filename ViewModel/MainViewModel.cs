@@ -9,32 +9,40 @@ public class MainViewModel : ViewModel
 {
     public Asset SelectedAsset { get; set; }
 
-    private ObservableCollection<Asset> _assets;
-    public ObservableCollection<Asset> Assets
+    public string Keyword
+    {
+        set => GetSearchedData(value);
+    }
+
+    private NotifyTaskCompletion<ObservableCollection<Asset>> _assets;
+
+    public NotifyTaskCompletion<ObservableCollection<Asset>> Assets
     {
         get => _assets;
         set
         {
             _assets = value;
             OnPropertyChanged();
-        } 
+        }
     }
+
     public MainViewModel()
     {
         GetData();
     }
 
-    private async void GetData()
+    private void GetData()
     {
-        var assets = await RepositoryInstance.GetTopAssetsAsync(10);
-        Assets = new ObservableCollection<Asset>(assets);
+        Assets = new NotifyTaskCompletion<ObservableCollection<Asset>>(RepositoryInstance.GetTopAssetsAsync(10));
     }
 
-    public async void GetSearchedData(string keyword)
+    public void GetSearchedData(string keyword)
     {
-        var assets = await RepositoryInstance.GetSearchedAssetsAsync(keyword);
-        Assets = new ObservableCollection<Asset>(assets);
+        Assets = new NotifyTaskCompletion<ObservableCollection<Asset>>(RepositoryInstance.GetSearchedAssetsAsync(keyword));
     }
-    
-    
+
+    public DetailedViewModel GetDetailedWindowInfo()
+    {
+        return new DetailedViewModel(SelectedAsset);
+    }
 }

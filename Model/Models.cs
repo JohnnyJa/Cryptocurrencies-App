@@ -1,4 +1,6 @@
-﻿namespace Model;
+﻿using System.Collections.ObjectModel;
+
+namespace Model;
 
 public class AssetData
 {
@@ -8,7 +10,7 @@ public class AssetData
 
 public class AssetsData
 {
-    public List<Asset> Data { get; set; }
+    public ObservableCollection<Asset> Data { get; set; }
     public long Timestamp { get; set; }
 }
 
@@ -35,7 +37,7 @@ public class MarketData
 
 public class MarketsData
 {
-    public List<Market> Data { get; set; }
+    public ObservableCollection<Market> Data { get; set; }
     public long Timestamp { get; set; }
 }
 
