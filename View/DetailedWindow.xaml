@@ -15,7 +15,7 @@
                 <StackPanel>
                         <TextBlock Width="Auto" FontSize="18" Text="{Binding Path=SelectedAsset.Id, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
-                <ListView Grid.Row="1" ItemsSource="{Binding Markets}" SelectedItem="{Binding SelectedAsset}">
+                <ListView Grid.Row="1" ItemsSource="{Binding Markets.Result}" >
                         <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

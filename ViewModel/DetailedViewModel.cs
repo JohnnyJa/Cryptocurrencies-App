@@ -6,24 +6,27 @@ namespace ViewModel;
 public class DetailedViewModel : ViewModel
 {
     public Asset SelectedAsset { get; set; }
+    
+    private NotifyTaskCompletion<ObservableCollection<Market>> _markets;
 
-    private ObservableCollection<Market> _markets;
-    public ObservableCollection<Market> Markets { get => _markets;
+    public NotifyTaskCompletion<ObservableCollection<Market>> Markets
+    {
+        get => _markets;
         set
         {
             _markets = value;
             OnPropertyChanged();
-        } }
+        }
+    }
 
     public DetailedViewModel(Asset selectedAsset)
     {
         SelectedAsset = selectedAsset;
-        GetMarkets(SelectedAsset.Id);
+        GetMarkets();
     }
 
-    private async void GetMarkets(string Id)
+    private void GetMarkets()
     {
-        var markets = await RepositoryInstance.GetMarketsByIdAsync(Id);
-        Markets = new ObservableCollection<Market>(markets);
+        Markets = new NotifyTaskCompletion<ObservableCollection<Market>>(RepositoryInstance.GetMarketsByIdAsync(SelectedAsset.Id));
     }
 }
