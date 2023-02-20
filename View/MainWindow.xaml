@@ -3,31 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:local="clr-namespace:Test"
+        xmlns:materialDesign="http://mateFrialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="Lavender">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.35*"></RowDefinition>
-            <RowDefinition Height="0.95*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="0.35*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Style="{StaticResource placeHolder}" Tag="Search..." MaxLength="250" Width="200" VerticalAlignment="Center" HorizontalAlignment="Right"
+        <TextBox Style="{StaticResource PlaceHolder}" Tag="Search" MaxLength="250" Width="200" VerticalAlignment="Center" HorizontalAlignment="Right"
                  Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}">
-            
+
         </TextBox>
-        <ListView Grid.Row="1" ItemsSource="{Binding Assets.Result}" SelectedItem="{Binding SelectedAsset}" MouseDoubleClick="Control_OnMouseDoubleClick">
+
+        <ListView Grid.Row="1" ItemsSource="{Binding Assets.Result}" SelectedItem="{Binding SelectedAsset}"
+                  MouseDoubleClick="Control_OnMouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Rank}">Rank</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"> Name</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Name</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=priceUsd}">Price</GridViewColumn>
                 </GridView>
             </ListView.View>
-            <i:Interaction.Triggers>
-                
-            </i:Interaction.Triggers>
         </ListView>
-        
+
     </Grid>
 </Window>
