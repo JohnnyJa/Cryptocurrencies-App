@@ -3,8 +3,10 @@ using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Model;
 using NewApp.CommandExternal;
+using NewApp.Pages;
 using NewApp.Services;
 using WpfPaging.Events;
 using WpfPaging.Messages;
@@ -30,6 +32,8 @@ public class MarketsViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
+    
+    public ICommand ChangePage { get; private set; }
 
     private IAsyncCommand _getData;
     public IAsyncCommand GetData { get=>_getData; private set
@@ -55,6 +59,9 @@ public class MarketsViewModel : ViewModelBase
             GetData.Execute(null);
         });
         
-        
+        ChangePage = AsyncCommand.Create(async () =>
+        {
+            _pageService.ChangePage(new AssetsPage());
+        });
     }
 }

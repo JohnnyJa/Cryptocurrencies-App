@@ -8,6 +8,7 @@
         DataContext="{Binding MainViewModel, Source={StaticResource ViewModelLocator}}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        
         <Frame Content="{Binding PageSource}" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

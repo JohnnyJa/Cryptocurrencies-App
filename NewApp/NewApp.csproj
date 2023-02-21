@@ -13,4 +13,23 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Resources\Img\SearchIco.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Remove="Resources\Themes\DarkTheme.xaml" />
+      <Page Remove="Resources\Themes\LightTheme.xaml" />
+      <Resource Include="Resources\Themes\DarkTheme.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Resource>
+      <Resource Include="Resources\Themes\LightTheme.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </Resource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Resources\Img" />
+    </ItemGroup>
+
 </Project>

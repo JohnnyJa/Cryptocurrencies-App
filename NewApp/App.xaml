@@ -5,17 +5,14 @@
              xmlns:app="clr-namespace:App"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <app:ViewModelLocator x:Key="ViewModelLocator" />
-            <!-- <ResourceDictionary.MergedDictionaries> -->
-            <!--     <ResourceDictionary -->
-            <!--         Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" /> -->
-            <!--     <ResourceDictionary -->
-            <!--         Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" /> -->
-            <!--     <ResourceDictionary -->
-            <!--         Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" /> -->
-            <!--     <ResourceDictionary -->
-            <!--         Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" /> -->
-            <!-- </ResourceDictionary.MergedDictionaries> -->
-            
+        <ResourceDictionary>
+            <app:ViewModelLocator x:Key="ViewModelLocator" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Themes/DarkTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/PlaceHolder.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Resources/Page.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

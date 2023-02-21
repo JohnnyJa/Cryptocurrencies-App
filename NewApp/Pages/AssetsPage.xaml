@@ -5,18 +5,33 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
       xmlns:local="clr-namespace:NewApp.Pages"
+      Style="{StaticResource PageStyle}"
       DataContext="{Binding AssetsViewModel, Source={StaticResource ViewModelLocator}}"
       mc:Ignorable="d"
       Title="AssetsPage" Height="450" Width="800">
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="0.35*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="0.35*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBox Tag="Search" MaxLength="250" Width="200"
+
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Themes">
+                <MenuItem Name="LightThemeMenuItem" Header="Light" Click="LightThemeMenuItem_OnClick"></MenuItem>
+                <MenuItem Name="DarkThemeMenuItem" Header="Dark" Click="DarkThemeMenuItem_OnClick"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+
+        <TextBox Grid.Row="0" Name="SearchBox" MaxLength="250" Width="170" Height="25"
+                 Style="{StaticResource placeHolder}" Tag="Search..."
                  VerticalAlignment="Center" HorizontalAlignment="Right"
                  Text="{Binding KeyWord, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox.Margin>
+                <Thickness Right="20" />
+            </TextBox.Margin>
         </TextBox>
 
         <ListView Grid.Row="1" ItemsSource="{Binding GetData.Execution.Result}"
@@ -35,6 +50,5 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </ListView>
-
     </Grid>
 </Page>
