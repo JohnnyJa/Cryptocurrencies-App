@@ -10,13 +10,14 @@
             <conv:PercentConverter x:Key="PercentConverter"/>
             <conv:PriceConverter x:Key="PriceConverter"/>
             <conv:VolumeConverter x:Key="VolumeConverter"/>
-            
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Themes/DarkTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary  Source="Resources/Themes/DarkTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary  Source="Resources/Themes/LightTheme.xaml"></ResourceDictionary>
+
                 <ResourceDictionary Source="Resources/PlaceHolder.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Resources/Page.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        
     </Application.Resources>
+    
 </Application>
