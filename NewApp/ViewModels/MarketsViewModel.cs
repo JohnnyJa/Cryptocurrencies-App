@@ -1,23 +1,42 @@
-﻿using System.Diagnostics.Eventing.Reader;
+﻿using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Model;
 using NewApp.CommandExternal;
 using NewApp.Services;
+using WpfPaging.Events;
 using WpfPaging.Messages;
 using WpfPaging.Services;
 
 namespace ViewModel;
 
-public class MarketsViewModel
+public class MarketsViewModel : ViewModelBase
 {
     private readonly PageService _pageService;
     private readonly EventBus _eventBus;
     private readonly MessageBus _messageBus;
     private readonly RepositoryService _repository;
 
-    public Asset ChosenAsset { get; set; } = new();
-    
-    public IAsyncCommand GetData { get; private set; }
+    private Asset _chosenAsset;
+
+    public Asset ChosenAsset
+    {
+        get => _chosenAsset;
+        set
+        {
+            _chosenAsset = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private IAsyncCommand _getData;
+    public IAsyncCommand GetData { get=>_getData; private set
+    {
+        _getData = value;
+        OnPropertyChanged();
+    } }
 
     public MarketsViewModel(PageService pageService, EventBus eventBus, MessageBus messageBus, RepositoryService repository)
     {
@@ -26,13 +45,16 @@ public class MarketsViewModel
         _messageBus = messageBus;
         _repository = repository;
 
-        _messageBus.Receive<AssetMessage>(new object(), message => Task.FromResult(ChosenAsset = message.Asset));
         
-        GetData = AsyncCommand.Create(() =>
-            EntryConverter.ToObservableMarketsAsync(_repository.GetMarketsByIdAsync(ChosenAsset.Id)));
+        _messageBus.Receive<AssetMessage>(this, async message =>
+        {
+            ChosenAsset = message.Asset;
+            GetData = AsyncCommand.Create(() =>
+                EntryConverter.ToObservableMarketsAsync(_repository.GetMarketsByIdAsync(ChosenAsset.Id)));
         
-        GetData.Execute(null);
+            GetData.Execute(null);
+        });
+        
+        
     }
-    
-    
 }

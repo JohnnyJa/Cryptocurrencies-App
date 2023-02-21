@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using App;
-using Microsoft.Xaml.Behaviors.Core;
 using Model;
 using NewApp.CommandExternal;
 using NewApp.Pages;
@@ -15,7 +13,7 @@ using WpfPaging.Services;
 
 namespace ViewModel;
 
-public class AssetsViewModel : INotifyPropertyChanged
+public class AssetsViewModel : ViewModelBase
 {
     private readonly PageService _pageService;
     private readonly EventBus _eventBus;
@@ -30,32 +28,67 @@ public class AssetsViewModel : INotifyPropertyChanged
         _messageBus = messageBus;
         _repository = repository;
 
-        GetData = AsyncCommand.Create(() =>
-             EntryConverter.ToObservableAssetsAsync(_repository.GetTopAssetsAsync(10)));
-
-        GetData.Execute(null);
+        
+        GetStartData();
         
         ChangePage = AsyncCommand.Create(async () =>
         {
             _pageService.ChangePage(new MarketPage());
 
-            await  _messageBus.SendTo<MarketsViewModel>(new AssetMessage(SelectedAsset));
+            await _messageBus.SendTo<MarketsViewModel>(new AssetMessage(SelectedAsset));
         });
-        
-        // Assets = new NotifyTaskCompletion<ObservableCollection<Asset>>(
-        //     EntryConverter.ToObservableAssetsAsync(repository.GetTopAssetsAsync(10)));
     }
+
+    private string _keyword;
+    public string KeyWord
+    {
+        get => _keyword;
+        set
+        {
+            _keyword = value;
+            OnPropertyChanged();
+            GetSearchedData();
+        }
+    }
+
+    private Asset _selectedAsset;
 
     public Asset SelectedAsset
     {
-        get;
-        set;
+        get => _selectedAsset;
+        set
+        {
+            _selectedAsset = value;
+            OnPropertyChanged();
+        }
     }
 
-    public IAsyncCommand GetData { get; private set; }
+    private IAsyncCommand _getData;
 
-    public ICommand ChangePage { get; private set; }
+    public IAsyncCommand GetData
+    {
+        get => _getData;
+        private set
+        {
+            _getData = value;
+            OnPropertyChanged();
+        }
+    }
+
+    private void GetStartData()
+    {
+        GetData = AsyncCommand.Create(() =>
+            EntryConverter.ToObservableAssetsAsync(_repository.GetTopAssetsAsync(10)));
+
+        GetData.Execute(null);
+    }
+
+    private void GetSearchedData()
+    {
+        GetData = AsyncCommand.Create(() =>
+            EntryConverter.ToObservableAssetsAsync(_repository.GetSearchedAssetsAsync(KeyWord)));
+        GetData.Execute(null);
+    }
     
-
-    public event PropertyChangedEventHandler PropertyChanged;
+    public ICommand ChangePage { get; private set; }
 }

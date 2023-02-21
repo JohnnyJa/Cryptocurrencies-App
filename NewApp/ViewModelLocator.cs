@@ -13,6 +13,7 @@ public class ViewModelLocator
     public static void Init()
     {
         var services = new ServiceCollection();
+        
         services.AddTransient<MainViewModel>();
         services.AddTransient<AssetsViewModel>();
         services.AddScoped<MarketsViewModel>();

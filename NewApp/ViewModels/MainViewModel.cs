@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -10,18 +11,32 @@ using NewApp.Services;
 
 namespace ViewModel;
 
-public class MainViewModel
+public class MainViewModel : ViewModelBase
 {
     private readonly PageService _pageService;
-    
-    public Page PageSource { get; set; }
-    
+
+    private Page _pageSource;
+
+    public Page PageSource
+    {
+        get => _pageSource;
+        set
+        {
+            _pageSource = value;
+            OnPropertyChanged();
+        }
+    }
+
     public MainViewModel(PageService pageService)
     {
         _pageService = pageService;
 
 
-        _pageService.OnPageChanged += (page) => PageSource = page;
+        _pageService.OnPageChanged += (page) =>
+        {
+            PageSource = page;
+            Debug.WriteLine("123");
+        };
         _pageService.ChangePage(new AssetsPage());
     }
 }

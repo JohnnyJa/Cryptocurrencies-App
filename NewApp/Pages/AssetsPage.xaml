@@ -16,10 +16,8 @@
         </Grid.RowDefinitions>
         <TextBox Tag="Search" MaxLength="250" Width="200"
                  VerticalAlignment="Center" HorizontalAlignment="Right"
-                 Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}">
+                 Text="{Binding KeyWord, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
-
-        <Button Command="{Binding ChangePage}" Content="11"></Button>
 
         <ListView Grid.Row="1" ItemsSource="{Binding GetData.Execution.Result}"
                   SelectedItem="{Binding SelectedAsset}">
