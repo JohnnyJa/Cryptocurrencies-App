@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using App;
 
 namespace NewApp.Pages;
 
@@ -17,7 +14,7 @@ public partial class AssetsPage : Page
     private void LightThemeMenuItem_OnClick(object sender, RoutedEventArgs e)
     {
         var uri = new Uri("Resources/Themes/LightTheme.xaml", UriKind.Relative);
-        ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+        ResourceDictionary? resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
         Application.Current.Resources.Clear();
         Application.Current.Resources.MergedDictionaries.Add(resourceDict);
     }
@@ -25,7 +22,7 @@ public partial class AssetsPage : Page
     private void DarkThemeMenuItem_OnClick(object sender, RoutedEventArgs e)
     {
         var uri = new Uri("Resources/Themes/DarkTheme.xaml", UriKind.Relative);
-        ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+        ResourceDictionary? resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
         Application.Current.Resources.Clear();
         Application.Current.Resources.MergedDictionaries.Add(resourceDict);
     }

@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:NewApp.Pages"
       mc:Ignorable="d"
       Style="{StaticResource PageStyle}"
       DataContext="{Binding MarketsViewModel, Source={StaticResource ViewModelLocator}}"
@@ -32,28 +31,28 @@
             <StackPanel Grid.Row="1" Grid.Column="0">
                 <TextBlock Margin="5" Text="Volume: "></TextBlock>
                 <TextBlock Margin="5" DockPanel.Dock="Left" Width="Auto"
-                           Text="{Binding Path=ChosenAsset.Volume, UpdateSourceTrigger=PropertyChanged}" />
+                           Text="{Binding Path=ChosenAsset.Volume, Converter={StaticResource VolumeConverter}, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <TextBlock Margin="5" Text="Price: "></TextBlock>
                 <TextBlock Margin="5" Width="Auto"
-                           Text="{Binding Path=ChosenAsset.Price, UpdateSourceTrigger=PropertyChanged}" />
+                           Text="{Binding Path=ChosenAsset.Price, Converter={StaticResource PriceConverter},UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="2">
                 <TextBlock Margin="5" Text="Price change at 24hr: "></TextBlock>
                 <TextBlock Margin="5" DockPanel.Dock="Right" Width="Auto"
-                           Text="{Binding Path=ChosenAsset.ChangePercent, UpdateSourceTrigger=PropertyChanged}" />
+                           Text="{Binding Path=ChosenAsset.ChangePercent,Converter={StaticResource PercentConverter}, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </Grid>
         <ListView Grid.Row="1" ItemsSource="{Binding GetData.Execution.Result}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=ExchangeId}">Name</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}"> Price</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price, Converter={StaticResource PriceConverter}}"> Price</GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
-        
-        <Button Grid.Row="2" Content="Back" Command="{Binding ChangePage}" HorizontalAlignment="Center" ></Button>
+
+        <Button Grid.Row="2" Content="Back" Command="{Binding ChangePage}" HorizontalAlignment="Center"></Button>
     </Grid>
 </Page>

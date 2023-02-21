@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using NewApp.CommandExternal;
+
+namespace NewApp.CommandExternal;
 
 public abstract class AsyncCommandBase : IAsyncCommand
 {

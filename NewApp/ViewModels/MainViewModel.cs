@@ -1,23 +1,17 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
+﻿using System.Diagnostics;
 using System.Windows.Controls;
-using System.Windows.Input;
-using App;
-using Model;
 using NewApp.Pages;
 using NewApp.Services;
 
-namespace ViewModel;
+namespace NewApp.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
     private readonly PageService _pageService;
 
-    private Page _pageSource;
+    private Page? _pageSource;
 
-    public Page PageSource
+    public Page? PageSource
     {
         get => _pageSource;
         set

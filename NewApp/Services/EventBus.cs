@@ -2,9 +2,9 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Threading.Tasks;
-using WpfPaging.Events;
+using NewApp.Events;
 
-namespace WpfPaging.Services
+namespace NewApp.Services
 {
     public class EventBus
     {

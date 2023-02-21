@@ -1,18 +1,13 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
-using Model;
 using NewApp.CommandExternal;
+using NewApp.Converters;
+using NewApp.Messages;
+using NewApp.Model;
 using NewApp.Pages;
 using NewApp.Services;
-using WpfPaging.Events;
-using WpfPaging.Messages;
-using WpfPaging.Services;
 
-namespace ViewModel;
+namespace NewApp.ViewModels;
 
 public class MarketsViewModel : ViewModelBase
 {
@@ -21,9 +16,9 @@ public class MarketsViewModel : ViewModelBase
     private readonly MessageBus _messageBus;
     private readonly RepositoryService _repository;
 
-    private Asset _chosenAsset;
+    private Asset? _chosenAsset;
 
-    public Asset ChosenAsset
+    public Asset? ChosenAsset
     {
         get => _chosenAsset;
         set
@@ -35,8 +30,8 @@ public class MarketsViewModel : ViewModelBase
     
     public ICommand ChangePage { get; private set; }
 
-    private IAsyncCommand _getData;
-    public IAsyncCommand GetData { get=>_getData; private set
+    private IAsyncCommand? _getData;
+    public IAsyncCommand? GetData { get=>_getData; private set
     {
         _getData = value;
         OnPropertyChanged();
@@ -50,18 +45,20 @@ public class MarketsViewModel : ViewModelBase
         _repository = repository;
 
         
-        _messageBus.Receive<AssetMessage>(this, async message =>
+        _messageBus.Receive<AssetMessage>(this, message =>
         {
             ChosenAsset = message.Asset;
             GetData = AsyncCommand.Create(() =>
-                EntryConverter.ToObservableMarketsAsync(_repository.GetMarketsByIdAsync(ChosenAsset.Id)));
+                EntryConverter.ToObservableMarketsAsync(_repository.GetMarketsByIdAsync(ChosenAsset!.Id)));
         
             GetData.Execute(null);
+            return Task.CompletedTask;
         });
         
-        ChangePage = AsyncCommand.Create(async () =>
+        ChangePage = AsyncCommand.Create(() =>
         {
             _pageService.ChangePage(new AssetsPage());
+            return Task.CompletedTask;
         });
     }
 }

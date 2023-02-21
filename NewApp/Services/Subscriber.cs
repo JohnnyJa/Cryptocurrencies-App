@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WpfPaging.Services
+namespace NewApp.Services
 {
     class EventSubscriber : IDisposable
     {
@@ -16,7 +16,7 @@ namespace WpfPaging.Services
 
         public void Dispose()
         {
-            _action?.Invoke(this);
+            _action(this);
         }
     }
 
@@ -36,7 +36,7 @@ namespace WpfPaging.Services
 
         public void Dispose()
         {
-            _action?.Invoke(this);
+            _action(this);
         }
     }
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Input;
 
+namespace NewApp.CommandExternal;
+
 public sealed class DelegateCommand : ICommand
 {
     private readonly Action _command;

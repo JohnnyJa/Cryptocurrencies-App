@@ -1,28 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Model;
-using JsonSerializer = System.Text.Json.JsonSerializer;
+using NewApp.EntryEntities;
+
+namespace NewApp.Services;
 
 public class RepositoryService
 {
-    static HttpClient _client = new HttpClient();
-
-    // private static RepositoryService _uniqueRepositoryService;
-    // public static RepositoryService GetInstance()
-    // {
-    //     if (_uniqueRepositoryService == null)
-    //     {
-    //         _uniqueRepositoryService = new RepositoryService();
-    //     }
-    //
-    //     return _uniqueRepositoryService;
-    // }
-
+    private readonly HttpClient _client = new HttpClient();
+    
     public RepositoryService()
     {
         
@@ -32,7 +20,7 @@ public class RepositoryService
             new MediaTypeWithQualityHeaderValue("application/json"));
     }
 
-    public async Task<EntryAssetsList> GetTopAssetsAsync(int num)
+    public async Task<EntryAssetsList?> GetTopAssetsAsync(int num)
     {
         string relativeUrl = "assets/?limit=" + num;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
@@ -40,7 +28,7 @@ public class RepositoryService
         return assets;
     }
 
-    public async Task<EntryAsset> GetAssetByIdAsync(string id)
+    public async Task<EntryAsset?> GetAssetByIdAsync(string id)
     {
         string relativeUrl = "assets/" + id;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
@@ -48,7 +36,7 @@ public class RepositoryService
         return asset;
     }
 
-    public async Task<EntryAssetsList> GetSearchedAssetsAsync(string keyword, int? num = 10)
+    public async Task<EntryAssetsList?> GetSearchedAssetsAsync(string? keyword, int? num = 10)
     {
         string relativeUrl = "assets?search=" + keyword + "&limit=" + num;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);
@@ -56,7 +44,7 @@ public class RepositoryService
         return assets;
     }
 
-    public async Task<EntryMarketsList> GetMarketsByIdAsync(string id, int? num = 10)
+    public async Task<EntryMarketsList?> GetMarketsByIdAsync(string? id, int? num = 10)
     {
         string relativeUrl = "assets/" + id + "/markets?limit=" + num;
         Uri url = new Uri(_client.BaseAddress!, relativeUrl);

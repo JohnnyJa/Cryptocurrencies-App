@@ -1,13 +1,13 @@
-﻿using Model;
+﻿using NewApp.Model;
 
-namespace WpfPaging.Messages;
+namespace NewApp.Messages;
 
 public class AssetMessage : IMessage
 {
-    public AssetMessage(Asset asset)
+    public AssetMessage(Asset? asset)
     {
         Asset = asset;
     }
     
-    public Asset Asset { get; set; }
+    public Asset? Asset { get; set; }
 }

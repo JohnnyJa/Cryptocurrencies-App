@@ -1,4 +1,4 @@
-﻿namespace WpfPaging.Messages
+﻿namespace NewApp.Messages
 {
     public class TextMessage : IMessage
     {

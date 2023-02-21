@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using WpfPaging.Events;
-using WpfPaging.Messages;
+using NewApp.Messages;
 
-namespace WpfPaging.Services
+namespace NewApp.Services
 {
     public class MessageBus
     {

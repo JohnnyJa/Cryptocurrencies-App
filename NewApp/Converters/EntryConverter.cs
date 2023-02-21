@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Model;
+using NewApp.EntryEntities;
+using NewApp.Model;
 
-namespace NewApp.Services;
+namespace NewApp.Converters;
 
-public class EntryConverter
+public static class EntryConverter
 {
-    private static Asset ConvertDataToAsset(AssetData assetData)
+    private static Asset ConvertDataToAsset(AssetData? assetData)
     {
         Asset asset = new Asset()
         {
-            Id = assetData.Id,
+            Id = assetData!.Id,
             Name = assetData.Name,
-            ChangePercent = assetData.changePercent24Hr,
-            Price = assetData.priceUsd,
+            ChangePercent = assetData.ChangePercent24Hr,
+            Price = assetData.PriceUsd,
             Rank = assetData.Rank,
             Symbol = assetData.Symbol,
-            Volume = assetData.volumeUsd24Hr
+            Volume = assetData.VolumeUsd24Hr
         };
 
         return asset;
@@ -33,7 +33,7 @@ public class EntryConverter
     {
         var res = new ObservableCollection<Asset>();
         var assetList = entryAssetsList.Data;
-        foreach (var assetData in assetList)
+        foreach (var assetData in assetList!)
         {
             res.Add(ConvertDataToAsset(assetData));
         }
@@ -47,12 +47,12 @@ public class EntryConverter
         return ConvertDataToAsset(asset.Data);
     }
 
-    public static async Task<ObservableCollection<Asset>> ToObservableAssetsAsync(Task<EntryAssetsList> entryTask)
+    public static async Task<ObservableCollection<Asset>> ToObservableAssetsAsync(Task<EntryAssetsList?> entryTask)
     {
         var res = new ObservableCollection<Asset>();
         var assetList = await entryTask;
         
-        foreach (var assetData in assetList.Data)
+        foreach (var assetData in assetList!.Data!)
         {
             res.Add(ConvertDataToAsset(assetData));
         }
@@ -60,12 +60,12 @@ public class EntryConverter
         return res;
     }
     
-    private static Market ConvertDataToMarket(MarketData marketData)
+    private static Market ConvertDataToMarket(MarketData? marketData)
     {
         Market market = new Market()
         {
-            ExchangeId = marketData.ExchangeId,
-            Price = marketData.priceUsd
+            ExchangeId = marketData!.ExchangeId,
+            Price = marketData.PriceUsd
         };
 
         return market;
@@ -81,7 +81,7 @@ public class EntryConverter
     {
         var res = new ObservableCollection<Market>();
         var marketList = entryMarketsList.Data;
-        foreach (var marketData in marketList)
+        foreach (var marketData in marketList!)
         {
             res.Add(ConvertDataToMarket(marketData));
         }
@@ -95,12 +95,12 @@ public class EntryConverter
         return ConvertDataToMarket(market.Data);
     }
 
-    public static async Task<ObservableCollection<Market>> ToObservableMarketsAsync(Task<EntryMarketsList> entryTask)
+    public static async Task<ObservableCollection<Market>> ToObservableMarketsAsync(Task<EntryMarketsList?> entryTask)
     {
         var res = new ObservableCollection<Market>();
         var marketList = await entryTask;
         
-        foreach (var marketData in marketList.Data)
+        foreach (var marketData in marketList!.Data!)
         {
             res.Add(ConvertDataToMarket(marketData));
         }

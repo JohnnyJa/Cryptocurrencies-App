@@ -4,7 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-      xmlns:local="clr-namespace:NewApp.Pages"
       Style="{StaticResource PageStyle}"
       DataContext="{Binding AssetsViewModel, Source={StaticResource ViewModelLocator}}"
       mc:Ignorable="d"
@@ -26,7 +25,7 @@
 
 
         <TextBox Grid.Row="0" Name="SearchBox" MaxLength="250" Width="170" Height="25"
-                 Style="{StaticResource placeHolder}" Tag="Search..."
+                 Style="{StaticResource PlaceHolder}" Tag="Search..."
                  VerticalAlignment="Center" HorizontalAlignment="Right"
                  Text="{Binding KeyWord, UpdateSourceTrigger=PropertyChanged}">
             <TextBox.Margin>
@@ -40,7 +39,9 @@
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Rank}">Rank</GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Name</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}">Price</GridViewColumn>
+                    <GridViewColumn
+                        DisplayMemberBinding="{Binding Path=Price, 
+                        Converter={StaticResource PriceConverter}}">Price</GridViewColumn>
                 </GridView>
             </ListView.View>
             <i:Interaction.Triggers>

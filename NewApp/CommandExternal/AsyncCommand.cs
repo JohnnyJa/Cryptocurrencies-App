@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace NewApp.CommandExternal;
 
-public sealed class AsyncCommand<TResult> : AsyncCommandBase, INotifyPropertyChanged
+public class AsyncCommand<TResult> : AsyncCommandBase, INotifyPropertyChanged
 {
     private readonly Func<CancellationToken, Task<TResult>> _command;
     private readonly CancelAsyncCommand _cancelCommand;
@@ -50,8 +50,7 @@ public sealed class AsyncCommand<TResult> : AsyncCommandBase, INotifyPropertyCha
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
-
-    private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {
         PropertyChangedEventHandler handler = PropertyChanged;
         if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));

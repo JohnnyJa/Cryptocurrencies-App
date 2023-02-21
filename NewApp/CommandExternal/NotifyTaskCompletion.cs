@@ -1,6 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+
+namespace NewApp.CommandExternal;
+
 public sealed class NotifyTaskCompletion<TResult> : INotifyPropertyChanged
 {
     public NotifyTaskCompletion(Task<TResult> task)
@@ -58,7 +61,7 @@ public sealed class NotifyTaskCompletion<TResult> : INotifyPropertyChanged
         get
         {
             return Task.Status ==
-                TaskStatus.RanToCompletion;
+                   TaskStatus.RanToCompletion;
         }
     }
     public bool IsCanceled { get { return Task.IsCanceled; } }

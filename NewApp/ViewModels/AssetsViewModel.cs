@@ -1,17 +1,12 @@
-﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using Model;
+﻿using System.Windows.Input;
 using NewApp.CommandExternal;
+using NewApp.Converters;
+using NewApp.Messages;
+using NewApp.Model;
 using NewApp.Pages;
 using NewApp.Services;
-using WpfPaging.Events;
-using WpfPaging.Messages;
-using WpfPaging.Services;
 
-namespace ViewModel;
+namespace NewApp.ViewModels;
 
 public class AssetsViewModel : ViewModelBase
 {
@@ -39,8 +34,8 @@ public class AssetsViewModel : ViewModelBase
         });
     }
 
-    private string _keyword;
-    public string KeyWord
+    private string? _keyword;
+    public string? KeyWord
     {
         get => _keyword;
         set
@@ -51,9 +46,9 @@ public class AssetsViewModel : ViewModelBase
         }
     }
 
-    private Asset _selectedAsset;
+    private Asset? _selectedAsset;
 
-    public Asset SelectedAsset
+    public Asset? SelectedAsset
     {
         get => _selectedAsset;
         set
@@ -63,9 +58,9 @@ public class AssetsViewModel : ViewModelBase
         }
     }
 
-    private IAsyncCommand _getData;
+    private IAsyncCommand? _getData;
 
-    public IAsyncCommand GetData
+    public IAsyncCommand? GetData
     {
         get => _getData;
         private set

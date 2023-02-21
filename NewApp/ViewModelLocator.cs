@@ -1,14 +1,12 @@
-﻿using System.Windows.Markup;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using NewApp.Services;
-using ViewModel;
-using WpfPaging.Services;
+using NewApp.ViewModels;
 
-namespace App;
+namespace NewApp;
 
 public class ViewModelLocator
 {
-    private static ServiceProvider _provider;
+    private static ServiceProvider _provider = null!;
 
     public static void Init()
     {
